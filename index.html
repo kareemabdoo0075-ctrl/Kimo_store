@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Play Games Zone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- شريط البحث العلوي -->
+    <header class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="ابحث عن تطبيق أو لعبة...">
+    </header>
+
+    <main class="container">
+
+        <!-- شبكة التصنيفات 2x2 -->
+        <section class="explore-section">
+            <h2>Explore games</h2>
+            <div class="categories-grid">
+                <button class="cat-card" onclick="filterCategory('online')">
+                    <span>ألعاب أونلاين</span>
+                    <span class="cat-icon">🌐</span>
+                </button>
+                <button class="cat-card" onclick="filterCategory('offline')">
+                    <span>ألعاب أوفلاين</span>
+                    <span class="cat-icon">📴</span>
+                </button>
+                <button class="cat-card" onclick="filterCategory('download')">
+                    <span>العاب للتحميل</span>
+                    <span class="cat-icon">📥</span>
+                </button>
+                <button class="cat-card" onclick="filterCategory('popular')">
+                    <span>الأكثر شعبية</span>
+                    <span class="cat-icon">🔥</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- قسم عرض الألعاب -->
+        <section class="games-section">
+            <div class="section-title-bar">
+                <h2 id="sectionTitle">Suggested for you</h2>
+                <button class="show-all-btn" onclick="filterCategory('all')">عرض الكل</button>
+            </div>
+            <div class="horizontal-scroll" id="gamesContainer"></div>
+        </section>
+
+    </main>
+
+    <script src="games.js"></script>
+    <script>
+        const container = document.getElementById('gamesContainer');
+        const sectionTitle = document.getElementById('sectionTitle');
+
+        function renderGames(list) {
+            container.innerHTML = '';
+            if (!list || list.length === 0) {
+                container.innerHTML = '<p class="empty-msg">لا توجد ألعاب متوفرة حالياً 🔍</p>';
+                return;
+            }
+
+            list.forEach(game => {
+                const isDownload = game.type === 'download';
+                const targetUrl = isDownload 
+                    ? game.url 
+                    : `play.html?url=${encodeURIComponent(game.url)}&title=${encodeURIComponent(game.title)}`;
+                const targetAttr = isDownload ? 'target="_blank"' : '';
+
+                const card = `
+                    <div class="store-card">
+                        <img src="${game.img}" alt="${game.title}" loading="lazy">
+                        <div class="card-title">${game.title}</div>
+                        <a href="${targetUrl}" ${targetAttr} class="play-btn">
+                            ${isDownload ? 'Install' : 'Play'}
+                        </a>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        function filterCategory(category) {
+            if (category === 'all') {
+                renderGames(games);
+                sectionTitle.innerText = 'كل الألعاب';
+                return;
+            }
+
+            const filtered = games.filter(g => g.category === category);
+            renderGames(filtered);
+            
+            const categoryNames = {
+                'online': '🌐 ألعاب أونلاين',
+                'offline': '📴 ألعاب أوفلاين',
+                'download': '📥 ألعاب للتحميل',
+                'popular': '🔥 الأكثر شعبية'
+            };
+            sectionTitle.innerText = categoryNames[category] || 'Suggested for you';
+        }
+
+        renderGames(games);
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const filtered = games.filter(g => g.title.toLowerCase().includes(query));
+            renderGames(filtered);
+            sectionTitle.innerText = query ? `نتائج البحث: ${query}` : 'Suggested for you';
+        });
+    </script>
+</body>
+</html>
 
