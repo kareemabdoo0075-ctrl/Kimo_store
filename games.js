@@ -3,14 +3,14 @@ const games = [
     { 
         title: "قتال العصي الملحمي", 
         category: "online", 
-        img: "https://img.gamedistribution.com/rvvAS308-512x512.jpeg", 
+        img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&auto=format&fit=crop&q=80", 
         url: "https://html5.gamedistribution.com/rvvAS308/",
         type: "play"
     },
     { 
         title: "سباق السيارات Nitro", 
         category: "online", 
-        img: "https://img.gamedistribution.com/62497fb26a114f04a601e3b6107383da-512x512.jpeg", 
+        img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&auto=format&fit=crop&q=80", 
         url: "https://html5.gamedistribution.com/62497fb26a114f04a601e3b6107383da/",
         type: "play"
     },
@@ -28,7 +28,7 @@ const games = [
     { 
         title: "PUBG Mobile", 
         category: "download", 
-        img: "https://play-lh.googleusercontent.com/JRd0B3A399-4w2H6BNDkd8n2334863_100", 
+        img: "https://m.media-amazon.com/images/I/71o3QvDkHPL.png", 
         url: "https://play.google.com/store/apps/details?id=com.tencent.ig",
         type: "download"
     },
@@ -37,9 +37,8 @@ const games = [
     { 
         title: "بطل القتال Brawl Hero", 
         category: "popular", 
-        img: "https://img.gamedistribution.com/f0426189db894819a16a8d80c058c49e-512x512.jpeg", 
+        img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=300&auto=format&fit=crop&q=80", 
         url: "https://html5.gamedistribution.com/f0426189db894819a16a8d80c058c49e/",
         type: "play"
     }
 ];
-
